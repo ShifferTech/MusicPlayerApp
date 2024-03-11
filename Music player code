@@ -1,1 +1,51 @@
+namespace MusicPlayerApp2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        //Create a global veriable of string type array that enables the title or names of the tracks and path of the track
+        String[] paths, files;
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            //Code to close the app
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //code to select songs
+            OpenFileDialog ofd = new OpenFileDialog();
+            //this is to select multiple files
+            ofd.Multiselect = true;
+
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                files = ofd.SafeFileNames;//save the names of the track in files array
+                paths = ofd.FileNames;//save the paths of the tracks in path array
+                //Display the music title in listbox
+                for (int i = 0; i < files.Length; i++)
+                {
+                    listBox1.Items.Add(files[i]);//display songs in the listbox
+
+                }
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //write a code to play music
+            axWindowsMediaPlayer1.URL = paths[MusicList.SelectedIndex];
+        }
+    }
+}
 
